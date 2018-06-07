@@ -1,20 +1,22 @@
-import { NgModel } from "@angular/forms";
-er/src/core";
+import { NgModule } from "@angular/core";
 
-import { Routes } from "@angular/router";
+import { Routes, RouterModule } from "@angular/router";
 import { RecipesComponent } from "./recipes/recipes.component";
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
+import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.component";
 
 const appRoutes: Routes = [
-    
-    { path: '', redirectTo: '/reipes' }
-    { path: 'recipes', component: RecipesComponent },
+    { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+    { path: 'recipes', component: RecipesComponent, children: [
+        {path: '', component: RecipeStartComponent}
+    ] },
     { path: 'shopping-list', component: ShoppingListComponent }
 
 ];
 
-@NgModel({
-
+@NgModule({
+    imports: [RouterModule.forRoot(appRoutes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {
 
